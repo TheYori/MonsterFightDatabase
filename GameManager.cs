@@ -1,13 +1,33 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonsterFightDatabase.Class;
+using System.Collections.Generic;
 
 namespace MonsterFightDatabase
 {
     public class GameManager : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        private SpriteBatch spriteBatch;
+
+        private static GameManager instance;
+
+        public static GameManager Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new GameManager();
+                }
+
+                return instance;
+            }
+        }
+
+        private List<GameObject> gameObjects = new List<GameObject>();
+        private Monster monster;
 
         public GameManager()
         {
@@ -18,16 +38,31 @@ namespace MonsterFightDatabase
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            GameObject go = new GameObject();
+
+            monster = new Monster();
+            go.AddComponent(new SpriteRenderer());
+            go.AddComponent(monster);
+            
+            gameObjects.Add(go);
+
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.Awake();
+            }
 
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.Start();
+            }
         }
 
         protected override void Update(GameTime gameTime)
@@ -36,7 +71,10 @@ namespace MonsterFightDatabase
                 Exit();
 
             // TODO: Add your update logic here
-
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.Update(gameTime);
+            }
             base.Update(gameTime);
         }
 
@@ -44,7 +82,13 @@ namespace MonsterFightDatabase
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.Draw(spriteBatch);
+            }
+            spriteBatch.End();
+
 
             base.Draw(gameTime);
         }
