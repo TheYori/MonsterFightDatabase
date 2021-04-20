@@ -28,6 +28,7 @@ namespace MonsterFightDatabase
 
         private List<GameObject> gameObjects = new List<GameObject>();
         private Monster monster;
+        private SpriteRenderer renderer;
 
         public GameManager()
         {
@@ -41,7 +42,9 @@ namespace MonsterFightDatabase
             GameObject go = new GameObject();
 
             monster = new Monster();
-            go.AddComponent(new SpriteRenderer());
+            renderer = new SpriteRenderer();
+            renderer.SetSprite("TestPicture");
+            go.AddComponent(renderer);
             go.AddComponent(monster);
             
             gameObjects.Add(go);
