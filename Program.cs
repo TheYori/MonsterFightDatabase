@@ -7,7 +7,7 @@ namespace MonsterFightDatabase
         [STAThread]
         static void Main()
         {
-            using (var game = new GameManager())
+            using (var game = GameManager.Instance)
                 game.Run();
         }
     }

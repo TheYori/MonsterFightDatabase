@@ -39,11 +39,16 @@ namespace MonsterFightDatabase
 
         protected override void Initialize()
         {
+            _graphics.PreferredBackBufferWidth = 1920;
+            _graphics.PreferredBackBufferHeight = 1080;
+            _graphics.ApplyChanges();
+
             GameObject go = new GameObject();
 
             monster = new Monster();
             renderer = new SpriteRenderer();
             renderer.SetSprite("TestPicture");
+
             go.AddComponent(renderer);
             go.AddComponent(monster);
             
