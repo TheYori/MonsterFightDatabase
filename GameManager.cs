@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using MonsterFightDatabase.Class;
 using System.Collections.Generic;
 
@@ -10,9 +11,9 @@ namespace MonsterFightDatabase
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch spriteBatch;
-
         private static GameManager instance;
 
+        private Song pumpedUpMusic; 
         public static GameManager Instance
         {
             get
@@ -65,7 +66,10 @@ namespace MonsterFightDatabase
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            pumpedUpMusic = Content.Load<Song>("ElectroMusic");
+            MediaPlayer.Play(pumpedUpMusic);
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.01f;
             // TODO: use this.Content to load your game content here
             foreach (GameObject gameObject in gameObjects)
             {

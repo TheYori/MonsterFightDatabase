@@ -85,6 +85,12 @@
 /processorParam:TextureFormat=Color
 /build:Backdrops/TeamBackdrop.jpg
 
+#begin ElectroMusic.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:ElectroMusic.mp3
+
 #begin Font/BaseFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
