@@ -11,7 +11,7 @@ namespace MonsterFightDatabase.Managers
         public FightManager() : base()
         {
             GameObject backdrop = new GameObject();
-            backdrop.Transform.Position = new Vector2(0, 0);
+            backdrop.Transform.Position = new Vector2(60, 128);
             SpriteRenderer renderer = new SpriteRenderer();
             renderer.SetSprite("Backdrops/FightBackdrop");
             backdrop.AddComponent(renderer);

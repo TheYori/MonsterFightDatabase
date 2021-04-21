@@ -30,5 +30,21 @@ namespace MonsterFightDatabase.Managers
                 gameObj.Draw(sprite);
             }
         }
+
+        public virtual void Awake()
+        {
+            foreach (GameObject gameObj in WindowObjects)
+            {
+                gameObj.Awake();
+            }
+        }
+
+        public virtual void Start()
+        {
+            foreach (GameObject gameObj in WindowObjects)
+            {
+                gameObj.Start();
+            }
+        }
     }
 }

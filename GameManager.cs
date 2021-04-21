@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonsterFightDatabase.Class;
 using MonsterFightDatabase.Managers;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 
@@ -34,7 +35,7 @@ namespace MonsterFightDatabase
         private Monster monster;
         private SpriteRenderer renderer;
 
-        private CurrentWindow currentWindow = CurrentWindow.Laboratory;
+        public static CurrentWindow currentWindow = CurrentWindow.Laboratory;
 
         private FightManager fightManager;
         private InventoryManager inventoryManager;
@@ -75,11 +76,25 @@ namespace MonsterFightDatabase
 
             gameObjects.Add(go);
 
+            GameObject UiFrame = new GameObject();
+            UiFrame.Transform.Position = new Vector2(0, 0);
+            renderer = new SpriteRenderer();
+            renderer.SetSprite("Ui/UiFrame");
+            UiFrame.AddComponent(renderer);
+            gameObjects.Add(UiFrame);
+
+            buttonSetup();
+
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Awake();
             }
-
+            fightManager.Awake();
+            inventoryManager.Awake();
+            laboratoryManager.Awake();
+            leagueManager.Awake();
+            shopManager.Awake();
+            teamManager.Awake();
             base.Initialize();
         }
 
@@ -96,6 +111,12 @@ namespace MonsterFightDatabase
             {
                 gameObject.Start();
             }
+            fightManager.Start();
+            inventoryManager.Start();
+            laboratoryManager.Start();
+            leagueManager.Start();
+            shopManager.Start();
+            teamManager.Start();
         }
 
         protected override void Update(GameTime gameTime)
@@ -192,6 +213,17 @@ namespace MonsterFightDatabase
 
 
             base.Draw(gameTime);
+        }
+
+        public void buttonSetup()
+        {
+            GameObject InvButton = new GameObject();
+            InvButton.Transform.Position = new Vector2(48, 32);
+            SpriteRenderer renderer = new SpriteRenderer();
+            renderer.SetSprite("Ui/UiButtons/InventoryButton");
+            InvButton.AddComponent(renderer);
+            InvButton.AddComponent(new Button(new Action(delegate () { GameManager.currentWindow = CurrentWindow.Inventory; })));
+            gameObjects.Add(InvButton);
         }
     }
 }

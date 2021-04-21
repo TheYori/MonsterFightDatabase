@@ -4,7 +4,13 @@ using System.Text;
 
 namespace MonsterFightDatabase.Class
 {
-    class Button : Component
+    public class Button : Component
     {
+        public Action action;
+
+        public Button(Action action)
+        {
+            this.action = action;
+        }
     }
 }
