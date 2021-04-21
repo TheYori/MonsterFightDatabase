@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonsterFightDatabase.Class;
 using System.Collections.Generic;
+using System.Data.SQLite;
 
 namespace MonsterFightDatabase
 {
@@ -44,6 +45,8 @@ namespace MonsterFightDatabase
             _graphics.PreferredBackBufferHeight = 1080;
             _graphics.ApplyChanges();
 
+
+
             GameObject go = new GameObject();
 
             monster = new Monster();
@@ -66,10 +69,11 @@ namespace MonsterFightDatabase
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            pumpedUpMusic = Content.Load<Song>("ElectroMusic");
-            MediaPlayer.Play(pumpedUpMusic);
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Volume = 0.01f;
+
+            //pumpedUpMusic = Content.Load<Song>("ElectroMusic");
+            //MediaPlayer.Play(pumpedUpMusic);
+            //MediaPlayer.IsRepeating = true;
+            //MediaPlayer.Volume = 0.01f;
             // TODO: use this.Content to load your game content here
             foreach (GameObject gameObject in gameObjects)
             {
