@@ -14,7 +14,7 @@ namespace MonsterFightDatabase
         private SpriteBatch spriteBatch;
         private static GameManager instance;
 
-        private Song pumpedUpMusic; 
+       //private Song pumpedUpMusic; 
         public static GameManager Instance
         {
             get
@@ -44,8 +44,6 @@ namespace MonsterFightDatabase
             _graphics.PreferredBackBufferWidth = 1920;
             _graphics.PreferredBackBufferHeight = 1080;
             _graphics.ApplyChanges();
-
-
 
             GameObject go = new GameObject();
 
