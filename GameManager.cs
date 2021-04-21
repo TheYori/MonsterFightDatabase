@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Media;
 using MonsterFightDatabase.Class;
 using MonsterFightDatabase.Managers;
 using System.Collections.Generic;
+using System.Data.SQLite;
 
 namespace MonsterFightDatabase
 {
@@ -15,7 +16,7 @@ namespace MonsterFightDatabase
         private SpriteBatch spriteBatch;
         private static GameManager instance;
 
-        private Song pumpedUpMusic; 
+        private Song pumpedUpMusic;
         public static GameManager Instance
         {
             get
@@ -71,7 +72,7 @@ namespace MonsterFightDatabase
 
             go.AddComponent(renderer);
             go.AddComponent(monster);
-            
+
             gameObjects.Add(go);
 
             foreach (GameObject gameObject in gameObjects)
@@ -85,10 +86,11 @@ namespace MonsterFightDatabase
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            pumpedUpMusic = Content.Load<Song>("ElectroMusic");
-            MediaPlayer.Play(pumpedUpMusic);
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Volume = 0.01f;
+
+            //pumpedUpMusic = Content.Load<Song>("ElectroMusic");
+            //MediaPlayer.Play(pumpedUpMusic);
+            //MediaPlayer.IsRepeating = true;
+            //MediaPlayer.Volume = 0.01f;
             // TODO: use this.Content to load your game content here
             foreach (GameObject gameObject in gameObjects)
             {
