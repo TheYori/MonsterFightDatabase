@@ -59,7 +59,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Backdrops/LeaugeBackdrop.jpg
+/build:Backdrops/LeaugeBackdrop.jpg;Backdrops/LeagueBackdrop.jpg
 
 #begin Backdrops/ShopBackdrop.jpg
 /importer:TextureImporter
