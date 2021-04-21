@@ -3,18 +3,21 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonsterFightDatabase.Class;
+using MonsterFightDatabase.Managers;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 
 namespace MonsterFightDatabase
 {
+    public enum CurrentWindow { Fight, Inventory, Laboratory, League, Shop, Team}
     public class GameManager : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch spriteBatch;
         private static GameManager instance;
 
-       //private Song pumpedUpMusic; 
+        //private Song pumpedUpMusic; 
         public static GameManager Instance
         {
             get
@@ -32,6 +35,16 @@ namespace MonsterFightDatabase
         private Monster monster;
         private SpriteRenderer renderer;
 
+        public static CurrentWindow currentWindow = CurrentWindow.Laboratory;
+
+        private FightManager fightManager;
+        private InventoryManager inventoryManager;
+        private LaboratoryManager laboratoryManager;
+        private LeagueManager leagueManager;
+        private ShopManager shopManager;
+        private TeamManager teamManager;
+
+
         public GameManager()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -45,6 +58,13 @@ namespace MonsterFightDatabase
             _graphics.PreferredBackBufferHeight = 1080;
             _graphics.ApplyChanges();
 
+            fightManager = new FightManager();
+            inventoryManager = new InventoryManager();
+            laboratoryManager = new LaboratoryManager();
+            leagueManager = new LeagueManager();
+            shopManager = new ShopManager();
+            teamManager = new TeamManager();
+
             GameObject go = new GameObject();
 
             monster = new Monster();
@@ -53,14 +73,28 @@ namespace MonsterFightDatabase
 
             go.AddComponent(renderer);
             go.AddComponent(monster);
-            
+
             gameObjects.Add(go);
+
+            GameObject UiFrame = new GameObject();
+            UiFrame.Transform.Position = new Vector2(0, 0);
+            renderer = new SpriteRenderer();
+            renderer.SetSprite("Ui/UiFrame");
+            UiFrame.AddComponent(renderer);
+            gameObjects.Add(UiFrame);
+
+            buttonSetup();
 
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Awake();
             }
-
+            fightManager.Awake();
+            inventoryManager.Awake();
+            laboratoryManager.Awake();
+            leagueManager.Awake();
+            shopManager.Awake();
+            teamManager.Awake();
             base.Initialize();
         }
 
@@ -77,6 +111,12 @@ namespace MonsterFightDatabase
             {
                 gameObject.Start();
             }
+            fightManager.Start();
+            inventoryManager.Start();
+            laboratoryManager.Start();
+            leagueManager.Start();
+            shopManager.Start();
+            teamManager.Start();
         }
 
         protected override void Update(GameTime gameTime)
@@ -88,6 +128,40 @@ namespace MonsterFightDatabase
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Update(gameTime);
+            }
+            switch (currentWindow)
+            {
+                case CurrentWindow.Fight:
+                    {
+                        fightManager.Update(gameTime);
+                        break;
+                    }
+                case CurrentWindow.Inventory:
+                    {
+                        inventoryManager.Update(gameTime);
+                        break;
+                    }
+                case CurrentWindow.Laboratory:
+                    {
+                        laboratoryManager.Update(gameTime);
+                        break;
+                    }
+                case CurrentWindow.League:
+                    {
+                        leagueManager.Update(gameTime);
+                        break;
+                    }
+                case CurrentWindow.Shop:
+                    {
+                        shopManager.Update(gameTime);
+                        break;
+                    }
+                case CurrentWindow.Team:
+                    {
+                        teamManager.Update(gameTime);
+                        break;
+                    }
+                default: break;
             }
             base.Update(gameTime);
         }
@@ -101,10 +175,55 @@ namespace MonsterFightDatabase
             {
                 gameObject.Draw(spriteBatch);
             }
+            switch (currentWindow)
+            {
+                case CurrentWindow.Fight:
+                    {
+                        fightManager.Draw(spriteBatch);
+                        break;
+                    }
+                case CurrentWindow.Inventory:
+                    {
+                        inventoryManager.Draw(spriteBatch);
+                        break;
+                    }
+                case CurrentWindow.Laboratory:
+                    {
+                        laboratoryManager.Draw(spriteBatch);
+                        break;
+                    }
+                case CurrentWindow.League:
+                    {
+                        leagueManager.Draw(spriteBatch);
+                        break;
+                    }
+                case CurrentWindow.Shop:
+                    {
+                        shopManager.Draw(spriteBatch);
+                        break;
+                    }
+                case CurrentWindow.Team:
+                    {
+                        teamManager.Draw(spriteBatch);
+                        break;
+                    }
+                default: break;
+            }
             spriteBatch.End();
 
 
             base.Draw(gameTime);
+        }
+
+        public void buttonSetup()
+        {
+            GameObject InvButton = new GameObject();
+            InvButton.Transform.Position = new Vector2(48, 32);
+            SpriteRenderer renderer = new SpriteRenderer();
+            renderer.SetSprite("Ui/UiButtons/InventoryButton");
+            InvButton.AddComponent(renderer);
+            InvButton.AddComponent(new Button(new Action(delegate () { GameManager.currentWindow = CurrentWindow.Inventory; })));
+            gameObjects.Add(InvButton);
         }
     }
 }
