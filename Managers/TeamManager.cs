@@ -34,9 +34,33 @@ namespace MonsterFightDatabase.Managers
             teamManageButton.AddComponent(renderer);
             WindowObjects.Add(teamManageButton);
 
+            //Heal Button
+            GameObject healButton = new GameObject();
+            healButton.Transform.Position = new Vector2(150, 350);
+            renderer = new SpriteRenderer();
+            renderer.SetSprite("TEAM/HealButton");
+            healButton.AddComponent(renderer);
+            //WindowObjects.Add(healButton);
+
+            //Psychology button
+            GameObject psycheButton = new GameObject();
+            psycheButton.Transform.Position = new Vector2(150, 525);
+            renderer = new SpriteRenderer();
+            renderer.SetSprite("TEAM/PsykButton");
+            psycheButton.AddComponent(renderer);
+            //WindowObjects.Add(psycheButton);
+
+            //HArvest Button
+            GameObject harvestButton = new GameObject();
+            harvestButton.Transform.Position = new Vector2(150, 700);
+            renderer = new SpriteRenderer();
+            renderer.SetSprite("TEAM/HarvestButton");
+            harvestButton.AddComponent(renderer);
+            //WindowObjects.Add(harvestButton);
+
             //Sponsor Button
             GameObject sponsorButton = new GameObject();
-            sponsorButton.Transform.Position = new Vector2(450, 200);
+            sponsorButton.Transform.Position = new Vector2(431, 200);
             renderer = new SpriteRenderer();
             renderer.SetSprite("TEAM/SponserButton");
             sponsorButton.AddComponent(renderer);
