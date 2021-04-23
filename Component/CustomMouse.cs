@@ -20,7 +20,7 @@ namespace MonsterFightDatabase.Class
         public override void Awake() 
         {
             Texture2D sprite = GameManager.Instance.Content.Load<Texture2D>("Ui/Mouse");
-            Mouse.SetCursor(MouseCursor.FromTexture2D(sprite, 1, 1));
+            Mouse.SetCursor(MouseCursor.FromTexture2D(sprite, 0, 0));
         }
         public Rectangle CollisionBox
         {
@@ -57,6 +57,8 @@ namespace MonsterFightDatabase.Class
                 hasBeenReleased = true;
             }
         }
-        public override void Draw(SpriteBatch sprite) { }
+        public override void Draw(SpriteBatch sprite) 
+        {
+        }
     }
 }
