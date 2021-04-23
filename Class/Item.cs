@@ -12,13 +12,15 @@ namespace MonsterFightDatabase.Class
         public int EffctNumber { get; set; }
         public int MonsterID { get; set; }
 
+        public int ItemId { get; set; }
 
-        public Item(string name, int price, int legal, int effectNumber)
+        public Item(string name, int price, int legal, int effectNumber, int id)
         {
             Name = name;
             Price = price;
             Legal = legal;
             EffctNumber = effectNumber;
+            ItemId = id;
         }
 
 

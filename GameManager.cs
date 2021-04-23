@@ -41,7 +41,7 @@ namespace MonsterFightDatabase
         private InventoryManager inventoryManager;
         private LaboratoryManager laboratoryManager;
         private LeagueManager leagueManager;
-        private ShopManager shopManager;
+        public ShopManager shopManager;
         private TeamManager teamManager;
 
 

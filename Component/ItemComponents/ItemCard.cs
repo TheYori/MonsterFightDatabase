@@ -8,37 +8,56 @@ namespace MonsterFightDatabase.Class
 {
     class ItemCard : Component
     {
-        private Item item;
+        public Item item;
         private SpriteFont itemFont;
         private SpriteRenderer spriteRenderer;
-
-        public ItemCard(Item item)
+        private SpriteRenderer buttonRender;
+        public GameObject BuyButton { get; set; }
+        public ItemCard(Item item, GameObject button)
         {
+
             this.item = item;
+            BuyButton = button;
+
         }
 
         public override void Awake()
         {
             spriteRenderer = (SpriteRenderer)GameObject.GetComponent("SpriteRenderer");
+            BuyButton.AddComponent(new Button(new Action(delegate () { BuyObject(); })));
         }
 
         public override void Start()
         {
             itemFont = GameManager.Instance.Content.Load<SpriteFont>("Font/BaseFont");
             spriteRenderer.Origin = new Vector2(0, 0);
+
+                         
         }
 
         public override void Draw(SpriteBatch sprite)
         {
             sprite.DrawString(itemFont, "Name: " + item.Name, GameObject.Transform.Position + new Vector2(30, 30), Color.White);
-            sprite.DrawString(itemFont, "Price: " + item.Price, GameObject.Transform.Position + new Vector2(300, 30), Color.White);
+            sprite.DrawString(itemFont, "Price: " + item.Price, GameObject.Transform.Position + new Vector2(450, 30), Color.White);
             sprite.DrawString(itemFont, "Risk: " + item.Legal, GameObject.Transform.Position + new Vector2(30, 80), Color.White);
-            sprite.DrawString(itemFont, "Effect: " + item.EffctNumber, GameObject.Transform.Position + new Vector2(400, 80), Color.White);
+            sprite.DrawString(itemFont, "Effect: " + item.EffctNumber, GameObject.Transform.Position + new Vector2(30, 130), Color.White);
+
+
             base.Draw(sprite);
         }
         public override string ToString()
         {
             return "ItemCard";
         }
+
+        public void BuyObject()
+        {
+
+            GameManager.Instance.shopManager.removeFromShop(GameObject, BuyButton);
+
+
+        }
+
+
     }
 }

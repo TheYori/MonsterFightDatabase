@@ -8,14 +8,14 @@ namespace MonsterFightDatabase.Managers
 {
     public class ShopManager : Manager
     {
-        private List<ItemCard> itemCards;
-        private List<Item> items;
 
+        private List<Item> items;
+        private List<GameObject> ItemCards;
 
         public ShopManager() : base()
         {
             items = new List<Item>();
-            itemCards = new List<ItemCard>();
+            ItemCards = new List<GameObject>();
 
             GameObject backdrop = new GameObject();
             backdrop.Transform.Position = new Vector2(60, 128);
@@ -40,43 +40,77 @@ namespace MonsterFightDatabase.Managers
             WindowObjects.Add(ShopScreen);
 
             items = SetupItems();
-            SetupCards(items);
+            ItemCards=SetupCards(items);
 
         }
 
         public List<Item> SetupItems()
         {
-            List<Item> result = new List<Item>();
 
-            result.Add(new Item("test", 1000, 60, 70));
-            result.Add(new Item("test2", 2000, 50, 80));
-            result.Add(new Item("test3", 3000, 40, 90));
-            return result;
+            return Database.GetShopItems();
         }
 
-        public void SetupCards(List<Item> items) {
+        public List<GameObject> SetupCards(List<Item> items) {
 
             List<SpriteRenderer> render = new List<SpriteRenderer>();
             List<GameObject> obj = new List<GameObject>();
 
+            List<SpriteRenderer> buttonRender = new List<SpriteRenderer>();
+            List<GameObject> buttonObj = new List<GameObject>();
 
-
+            List<GameObject> result = new List<GameObject>();
+            
+            
 
             for (var i = 0; i < items.Count; i++)
             {
-                render.Add(new SpriteRenderer());
-                obj.Add(new GameObject());
-                obj[i].Transform.Position = new Vector2(625, 225 +( i* 215));
-                render[i].SetSprite("SHOP/ShopItemCard");
-                obj[i].AddComponent(render[i]);
-                obj[i].AddComponent(new ItemCard(items[i]));
+                if(i < 3)
+                {
+                    render.Add(new SpriteRenderer());
+                    buttonRender.Add(new SpriteRenderer());
+                    obj.Add(new GameObject());
+                    buttonObj.Add(new GameObject());
 
-                WindowObjects.Add(obj[i]);
+                    obj[i].Transform.Position = new Vector2(625, 225 + (i * 215));
+                    buttonObj[i].Transform.Position = obj[i].Transform.Position + new Vector2(520, 110);
+                    render[i].SetSprite("SHOP/ShopItemCard");
+                    buttonRender[i].SetSprite("SHOP/BuyButton");
+                    obj[i].AddComponent(render[i]);
+                    buttonObj[i].AddComponent(buttonRender[i]);
+                    obj[i].AddComponent(new ItemCard(items[i], buttonObj[i]));
+
+                    WindowObjects.Add(obj[i]);
+                    WindowObjects.Add(buttonObj[i]);
+
+                    result.Add(obj[i]);
+                }
+     
+
             }
 
-   
+            return result;
+        }
 
+        public void removeFromShop(GameObject item, GameObject button)
+        {
+            for(var i = 0; i < WindowObjects.Count; i++)
+            {
+                if(WindowObjects[i] == item)
+                {
+                    WindowObjects.RemoveAt(i);
+                }
+            }
+
+            for (var i = 0; i < WindowObjects.Count; i++)
+            {
+                if (WindowObjects[i] == button)
+                {
+                    WindowObjects.RemoveAt(i);
+                }
+            }
 
         }
+
+
     }
 }
