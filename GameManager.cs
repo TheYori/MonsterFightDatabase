@@ -87,6 +87,13 @@ namespace MonsterFightDatabase
 
             buttonSetup();
 
+            fightManager.Awake();
+            inventoryManager.Awake();
+            laboratoryManager.Awake();
+            leagueManager.Awake();
+            shopManager.Awake();
+            teamManager.Awake();
+
             GameObject CustomMouse = new GameObject();
             CustomMouse mouse = new CustomMouse();
             CustomMouse.AddComponent(mouse);
@@ -96,12 +103,7 @@ namespace MonsterFightDatabase
             {
                 gameObject.Awake();
             }
-            fightManager.Awake();
-            inventoryManager.Awake();
-            laboratoryManager.Awake();
-            leagueManager.Awake();
-            shopManager.Awake();
-            teamManager.Awake();
+
             base.Initialize();
         }
 
