@@ -69,7 +69,7 @@ namespace MonsterFightDatabase
 
             GameObject go = new GameObject();
 
-            monster = new Monster();
+           monster = new Monster();
             renderer = new SpriteRenderer();
             renderer.SetSprite("TestPicture");
 
@@ -159,7 +159,7 @@ namespace MonsterFightDatabase
         public void buttonSetup()
         {
             GameObject invButton = new GameObject();
-            invButton.Transform.Position = new Vector2(48, 32);
+            invButton.Transform.Position = new Vector2(58, 32);
             SpriteRenderer renderer = new SpriteRenderer();
             renderer.SetSprite("Ui/UiButtons/InventoryButton");
             invButton.AddComponent(renderer);
@@ -167,7 +167,7 @@ namespace MonsterFightDatabase
             gameObjects.Add(invButton);
 
             GameObject labButton = new GameObject();
-            labButton.Transform.Position = new Vector2(325, 32);
+            labButton.Transform.Position = new Vector2(340, 32);
             renderer = new SpriteRenderer();
             renderer.SetSprite("Ui/UiButtons/CreateButton");
             labButton.AddComponent(renderer);
@@ -175,7 +175,7 @@ namespace MonsterFightDatabase
             gameObjects.Add(labButton);
 
             GameObject shopButton = new GameObject();
-            shopButton.Transform.Position = new Vector2(600, 32);
+            shopButton.Transform.Position = new Vector2(620, 32);
             renderer = new SpriteRenderer();
             renderer.SetSprite("Ui/UiButtons/ShopButton");
             shopButton.AddComponent(renderer);
@@ -183,7 +183,7 @@ namespace MonsterFightDatabase
             gameObjects.Add(shopButton);
 
             GameObject leagueButton = new GameObject();
-            leagueButton.Transform.Position = new Vector2(875, 32);
+            leagueButton.Transform.Position = new Vector2(900, 32);
             renderer = new SpriteRenderer();
             renderer.SetSprite("Ui/UiButtons/LeagueButton");
             leagueButton.AddComponent(renderer);
@@ -191,7 +191,7 @@ namespace MonsterFightDatabase
             gameObjects.Add(leagueButton);
 
             GameObject teamButton = new GameObject();
-            teamButton.Transform.Position = new Vector2(1175, 32);
+            teamButton.Transform.Position = new Vector2(1180, 32);
             renderer = new SpriteRenderer();
             renderer.SetSprite("Ui/UiButtons/TeamButton");
             teamButton.AddComponent(renderer);
