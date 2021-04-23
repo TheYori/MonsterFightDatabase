@@ -9,7 +9,7 @@ namespace MonsterFightDatabase.Managers
 {
     public abstract class Manager
     {
-        protected List<GameObject> WindowObjects { get; set; }
+        public List<GameObject> WindowObjects { get; set; }
 
         public Manager()
         {

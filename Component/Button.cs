@@ -12,5 +12,10 @@ namespace MonsterFightDatabase.Class
         {
             this.action = action;
         }
+
+        public override string ToString()
+        {
+            return "Button";
+        }
     }
 }

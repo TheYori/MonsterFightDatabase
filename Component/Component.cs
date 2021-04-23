@@ -19,5 +19,7 @@ namespace MonsterFightDatabase.Class
         public virtual void Update(GameTime gametime) { }
         public virtual void Draw(SpriteBatch sprite) { }
 
+        public override abstract string ToString();
+
     }
 }

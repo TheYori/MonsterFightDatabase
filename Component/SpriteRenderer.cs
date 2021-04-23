@@ -29,5 +29,18 @@ namespace MonsterFightDatabase.Class
             return "SpriteRenderer";
         }
 
+        public Rectangle CollisionBox
+        {
+            get
+            {
+                return new Rectangle(
+                       (int)(GameObject.Transform.Position.X),
+                       (int)(GameObject.Transform.Position.Y),
+                       Sprite.Width,
+                       Sprite.Height
+                   );
+            }
+        }
+
     }
 }

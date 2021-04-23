@@ -31,11 +31,11 @@ namespace MonsterFightDatabase
             }
         }
 
-        private List<GameObject> gameObjects = new List<GameObject>();
+        public List<GameObject> gameObjects = new List<GameObject>();
         private Monster monster;
         private SpriteRenderer renderer;
 
-        public static CurrentWindow currentWindow = CurrentWindow.Laboratory;
+        public Manager currentWindow;
 
         private FightManager fightManager;
         private InventoryManager inventoryManager;
@@ -65,6 +65,8 @@ namespace MonsterFightDatabase
             shopManager = new ShopManager();
             teamManager = new TeamManager();
 
+            currentWindow = laboratoryManager;
+
             GameObject go = new GameObject();
 
             monster = new Monster();
@@ -84,6 +86,11 @@ namespace MonsterFightDatabase
             gameObjects.Add(UiFrame);
 
             buttonSetup();
+
+            GameObject CustomMouse = new GameObject();
+            CustomMouse mouse = new CustomMouse();
+            CustomMouse.AddComponent(mouse);
+            gameObjects.Add(CustomMouse);
 
             foreach (GameObject gameObject in gameObjects)
             {
@@ -129,40 +136,7 @@ namespace MonsterFightDatabase
             {
                 gameObject.Update(gameTime);
             }
-            switch (currentWindow)
-            {
-                case CurrentWindow.Fight:
-                    {
-                        fightManager.Update(gameTime);
-                        break;
-                    }
-                case CurrentWindow.Inventory:
-                    {
-                        inventoryManager.Update(gameTime);
-                        break;
-                    }
-                case CurrentWindow.Laboratory:
-                    {
-                        laboratoryManager.Update(gameTime);
-                        break;
-                    }
-                case CurrentWindow.League:
-                    {
-                        leagueManager.Update(gameTime);
-                        break;
-                    }
-                case CurrentWindow.Shop:
-                    {
-                        shopManager.Update(gameTime);
-                        break;
-                    }
-                case CurrentWindow.Team:
-                    {
-                        teamManager.Update(gameTime);
-                        break;
-                    }
-                default: break;
-            }
+            currentWindow.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -175,40 +149,7 @@ namespace MonsterFightDatabase
             {
                 gameObject.Draw(spriteBatch);
             }
-            switch (currentWindow)
-            {
-                case CurrentWindow.Fight:
-                    {
-                        fightManager.Draw(spriteBatch);
-                        break;
-                    }
-                case CurrentWindow.Inventory:
-                    {
-                        inventoryManager.Draw(spriteBatch);
-                        break;
-                    }
-                case CurrentWindow.Laboratory:
-                    {
-                        laboratoryManager.Draw(spriteBatch);
-                        break;
-                    }
-                case CurrentWindow.League:
-                    {
-                        leagueManager.Draw(spriteBatch);
-                        break;
-                    }
-                case CurrentWindow.Shop:
-                    {
-                        shopManager.Draw(spriteBatch);
-                        break;
-                    }
-                case CurrentWindow.Team:
-                    {
-                        teamManager.Draw(spriteBatch);
-                        break;
-                    }
-                default: break;
-            }
+            currentWindow.Draw(spriteBatch);
             spriteBatch.End();
 
 
@@ -217,13 +158,53 @@ namespace MonsterFightDatabase
 
         public void buttonSetup()
         {
-            GameObject InvButton = new GameObject();
-            InvButton.Transform.Position = new Vector2(48, 32);
+            GameObject invButton = new GameObject();
+            invButton.Transform.Position = new Vector2(48, 32);
             SpriteRenderer renderer = new SpriteRenderer();
             renderer.SetSprite("Ui/UiButtons/InventoryButton");
-            InvButton.AddComponent(renderer);
-            InvButton.AddComponent(new Button(new Action(delegate () { GameManager.currentWindow = CurrentWindow.Inventory; })));
-            gameObjects.Add(InvButton);
+            invButton.AddComponent(renderer);
+            invButton.AddComponent(new Button(new Action(delegate () { this.currentWindow = inventoryManager; })));
+            gameObjects.Add(invButton);
+
+            GameObject labButton = new GameObject();
+            labButton.Transform.Position = new Vector2(325, 32);
+            renderer = new SpriteRenderer();
+            renderer.SetSprite("Ui/UiButtons/CreateButton");
+            labButton.AddComponent(renderer);
+            labButton.AddComponent(new Button(new Action(delegate () { this.currentWindow = laboratoryManager; })));
+            gameObjects.Add(labButton);
+
+            GameObject shopButton = new GameObject();
+            shopButton.Transform.Position = new Vector2(600, 32);
+            renderer = new SpriteRenderer();
+            renderer.SetSprite("Ui/UiButtons/ShopButton");
+            shopButton.AddComponent(renderer);
+            shopButton.AddComponent(new Button(new Action(delegate () { this.currentWindow = shopManager; })));
+            gameObjects.Add(shopButton);
+
+            GameObject leagueButton = new GameObject();
+            leagueButton.Transform.Position = new Vector2(875, 32);
+            renderer = new SpriteRenderer();
+            renderer.SetSprite("Ui/UiButtons/LeagueButton");
+            leagueButton.AddComponent(renderer);
+            leagueButton.AddComponent(new Button(new Action(delegate () { this.currentWindow = leagueManager; })));
+            gameObjects.Add(leagueButton);
+
+            GameObject teamButton = new GameObject();
+            teamButton.Transform.Position = new Vector2(1175, 32);
+            renderer = new SpriteRenderer();
+            renderer.SetSprite("Ui/UiButtons/TeamButton");
+            teamButton.AddComponent(renderer);
+            teamButton.AddComponent(new Button(new Action(delegate () { this.currentWindow = teamManager; })));
+            gameObjects.Add(teamButton);
+
+            GameObject fightButton = new GameObject();
+            fightButton.Transform.Position = new Vector2(1468, 800);
+            renderer = new SpriteRenderer();
+            renderer.SetSprite("Ui/UiButtons/FightButton");
+            fightButton.AddComponent(renderer);
+            fightButton.AddComponent(new Button(new Action(delegate () { this.currentWindow = fightManager; })));
+            gameObjects.Add(fightButton);
         }
     }
 }

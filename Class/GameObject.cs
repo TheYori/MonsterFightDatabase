@@ -28,7 +28,11 @@ namespace MonsterFightDatabase.Class
 
         public Component GetComponent(string component)
         {
-            return components[component];
+            if(components.ContainsKey(component))
+            {
+                return components[component];
+            }
+            return null;
         }
 
         public void Awake()

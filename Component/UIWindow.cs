@@ -6,5 +6,9 @@ namespace MonsterFightDatabase.Class
 {
     class UIWindow : Component
     {
+        public override string ToString()
+        {
+            return "UIWindow";
+        }
     }
 }
