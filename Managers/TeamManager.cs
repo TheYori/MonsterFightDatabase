@@ -8,6 +8,25 @@ namespace MonsterFightDatabase.Managers
 {
     public class TeamManager : Manager
     {
+
+        // TODO:
+        // 1.
+        // Make "Team Management" and "Sponsor" button.
+
+        //2.
+        // When pressing the "Team Management" button, Heal, psyche and harvest...
+        // buttons should appear.
+        // Then Do the same with the "Sponsor" button.
+
+        // 3.
+        // Next step: Make the newly appeared sprites buttons
+
+        //4.
+        //Give them a random function, to make sure they work.
+        // pressing the "Accept" button under "Sponsor", should make it green.
+        // BONUS: The "Accept" button turn back normal after 1 - 2 seconds.
+
+
         public TeamManager() : base()
         {
             //Backdrop for the Team menu
@@ -26,7 +45,7 @@ namespace MonsterFightDatabase.Managers
             infoScreen.AddComponent(renderer);
             WindowObjects.Add(infoScreen);
 
-            //Team Management button
+            //Team Management button - Opens the team management mini menu
             GameObject teamManageButton = new GameObject();
             teamManageButton.Transform.Position = new Vector2(150, 200);
             renderer = new SpriteRenderer();
@@ -34,7 +53,7 @@ namespace MonsterFightDatabase.Managers
             teamManageButton.AddComponent(renderer);
             WindowObjects.Add(teamManageButton);
 
-            //Heal Button
+            //Heal Button - appear when Team Management button is pressed
             GameObject healButton = new GameObject();
             healButton.Transform.Position = new Vector2(150, 350);
             renderer = new SpriteRenderer();
@@ -42,7 +61,7 @@ namespace MonsterFightDatabase.Managers
             healButton.AddComponent(renderer);
             //WindowObjects.Add(healButton);
 
-            //Psychology button
+            //Psychology button - appear when Team Management button is pressed
             GameObject psycheButton = new GameObject();
             psycheButton.Transform.Position = new Vector2(150, 525);
             renderer = new SpriteRenderer();
@@ -50,7 +69,7 @@ namespace MonsterFightDatabase.Managers
             psycheButton.AddComponent(renderer);
             //WindowObjects.Add(psycheButton);
 
-            //HArvest Button
+            //Harvest Button - appear when Team Management button is pressed
             GameObject harvestButton = new GameObject();
             harvestButton.Transform.Position = new Vector2(150, 700);
             renderer = new SpriteRenderer();
@@ -58,13 +77,24 @@ namespace MonsterFightDatabase.Managers
             harvestButton.AddComponent(renderer);
             //WindowObjects.Add(harvestButton);
 
-            //Sponsor Button
+            //Sponsor Button - Opens the sponsor mini menu
             GameObject sponsorButton = new GameObject();
             sponsorButton.Transform.Position = new Vector2(431, 200);
             renderer = new SpriteRenderer();
             renderer.SetSprite("TEAM/SponserButton");
             sponsorButton.AddComponent(renderer);
             WindowObjects.Add(sponsorButton);
+
+            //BUTTON COMMENTED OUT UNTIL SPONSOR BUTTON WORKS
+
+            //Accept button - appear when Sponsor button is pressed
+            //GameObject acceptButton = new GameObject();
+            //acceptButton.Transform.Position = new Vector2(150, 350);
+            //renderer = new SpriteRenderer();
+            //renderer.SetSprite("TEAM/SponserButton");
+            //acceptButton.AddComponent(renderer);
+            //WindowObjects.Add(acceptButton);
+
         }
     }
 }
