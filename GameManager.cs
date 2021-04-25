@@ -166,7 +166,7 @@ namespace MonsterFightDatabase
             SpriteRenderer renderer = new SpriteRenderer();
             renderer.SetSprite("Ui/UiButtons/InventoryButton");
             invButton.AddComponent(renderer);
-            invButton.AddComponent(new Button(new Action(delegate () { this.currentWindow = inventoryManager; })));
+            invButton.AddComponent(new Button(new Action(delegate () { this.currentWindow = inventoryManager; inventoryManager.InitInventory(); })));
             gameObjects.Add(invButton);
 
             GameObject labButton = new GameObject();
@@ -182,7 +182,7 @@ namespace MonsterFightDatabase
             renderer = new SpriteRenderer();
             renderer.SetSprite("Ui/UiButtons/ShopButton");
             shopButton.AddComponent(renderer);
-            shopButton.AddComponent(new Button(new Action(delegate () { this.currentWindow = shopManager; })));
+            shopButton.AddComponent(new Button(new Action(delegate () { this.currentWindow = shopManager; shopManager.InitShop();  })));
             gameObjects.Add(shopButton);
 
             GameObject leagueButton = new GameObject();

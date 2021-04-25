@@ -47,7 +47,7 @@ namespace MonsterFightDatabase.Managers
         public List<Item> SetupItems()
         {
 
-            return Database.GetInventoryItems();
+            return Database.GetShopItems();
         }
 
         public List<GameObject> SetupCards(List<Item> items) {
@@ -110,6 +110,8 @@ namespace MonsterFightDatabase.Managers
             }
 
         }
+
+        public void InitShop() { }
 
 
     }

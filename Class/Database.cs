@@ -8,6 +8,9 @@ namespace MonsterFightDatabase.Class
     static class Database
     {
 
+
+        public static void UpdateInventory(int itemID) { }
+
         public static List<Item> GetInventoryItems()
         {
 

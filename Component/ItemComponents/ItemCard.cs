@@ -64,8 +64,8 @@ namespace MonsterFightDatabase.Class
         public void BuyObject()
         {
 
+            Database.UpdateInventory(item.ItemId);
             GameManager.Instance.shopManager.removeFromShop(GameObject, BuyButton);
-
 
         }
 

@@ -99,5 +99,10 @@ namespace MonsterFightDatabase.Managers
 
             return result;
         }
+
+
+        public void InitInventory() {
+
+        }
     }
 }
