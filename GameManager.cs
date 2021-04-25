@@ -11,6 +11,7 @@ using System.Data.SQLite;
 namespace MonsterFightDatabase
 {
     public enum CurrentWindow { Fight, Inventory, Laboratory, League, Shop, Team}
+    public enum ItemCardType { Shop, Inventory }
     public class GameManager : Game
     {
         private GraphicsDeviceManager _graphics;

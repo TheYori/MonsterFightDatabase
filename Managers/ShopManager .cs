@@ -47,7 +47,7 @@ namespace MonsterFightDatabase.Managers
         public List<Item> SetupItems()
         {
 
-            return Database.GetShopItems();
+            return Database.GetInventoryItems();
         }
 
         public List<GameObject> SetupCards(List<Item> items) {
@@ -77,7 +77,7 @@ namespace MonsterFightDatabase.Managers
                     buttonRender[i].SetSprite("SHOP/BuyButton");
                     obj[i].AddComponent(render[i]);
                     buttonObj[i].AddComponent(buttonRender[i]);
-                    obj[i].AddComponent(new ItemCard(items[i], buttonObj[i]));
+                    obj[i].AddComponent(new ItemCard(items[i], buttonObj[i], ItemCardType.Shop));
 
                     WindowObjects.Add(obj[i]);
                     WindowObjects.Add(buttonObj[i]);
