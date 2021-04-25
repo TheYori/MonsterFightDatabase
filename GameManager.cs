@@ -68,17 +68,6 @@ namespace MonsterFightDatabase
 
             currentWindow = laboratoryManager;
 
-            GameObject go = new GameObject();
-
-           monster = new Monster();
-            renderer = new SpriteRenderer();
-            renderer.SetSprite("TestPicture");
-
-            go.AddComponent(renderer);
-            go.AddComponent(monster);
-
-            gameObjects.Add(go);
-
             GameObject UiFrame = new GameObject();
             UiFrame.Transform.Position = new Vector2(0, 0);
             renderer = new SpriteRenderer();
