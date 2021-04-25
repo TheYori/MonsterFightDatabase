@@ -13,13 +13,16 @@ namespace MonsterFightDatabase.Managers
 
         private inventoryState state = inventoryState.ItemState;
         private List<Item> items;
-        private List<GameObject> ItemCards;
-        public bool UpdateIncomming { get; set; }
+        private List<ItemCard> ItemCards;
+        public List<int> ItemIDToUpdate;
 
+        public bool UpdateIncomming { get; set; }
+ 
         public InventoryManager() : base()
         {
             items = new List<Item>();
-            ItemCards = new List<GameObject>();
+            ItemCards = new List<ItemCard>();
+            ItemIDToUpdate = new List<int>();
 
             GameObject backdrop = new GameObject();
             backdrop.Transform.Position = new Vector2(60, 128);
@@ -61,7 +64,7 @@ namespace MonsterFightDatabase.Managers
             return Database.GetInventoryItems();
         }
 
-        public List<GameObject> SetupItemIventoryCards(List<Item> items)
+        public List<ItemCard> SetupItemIventoryCards(List<Item> items)
         {
 
             List<SpriteRenderer> render = new List<SpriteRenderer>();
@@ -70,7 +73,9 @@ namespace MonsterFightDatabase.Managers
             List<SpriteRenderer> buttonRender = new List<SpriteRenderer>();
             List<GameObject> buttonObj = new List<GameObject>();
 
-            List<GameObject> result = new List<GameObject>();
+            List<ItemCard> itemCardObj = new List<ItemCard>();
+
+            List<ItemCard> result = new List<ItemCard>();
 
             for (var i = 0; i < items.Count; i++)
             {
@@ -87,12 +92,13 @@ namespace MonsterFightDatabase.Managers
                     buttonRender[i].SetSprite("INVENTORY/DropButton");
                     obj[i].AddComponent(render[i]);
                     buttonObj[i].AddComponent(buttonRender[i]);
-                    obj[i].AddComponent(new ItemCard(items[i], buttonObj[i], ItemCardType.Inventory));
+                    itemCardObj.Add(new ItemCard(items[i], buttonObj[i], ItemCardType.Inventory));
+                    obj[i].AddComponent(itemCardObj[i]);
 
                     WindowObjects.Add(obj[i]);
                     WindowObjects.Add(buttonObj[i]);
 
-                    result.Add(obj[i]);
+                    result.Add(itemCardObj[i]);
                 }
 
 
@@ -105,7 +111,49 @@ namespace MonsterFightDatabase.Managers
         public void InitInventory() {
             if(UpdateIncomming == true)
             {
+                for(var i=0; i < ItemIDToUpdate.Count; i++)
+                {
+                    for(var y =0; y < items.Count; y++)
+                    {
+                        if (ItemIDToUpdate[i] == items[y].ItemId)
+                        {
+                            items[y].Price = Database.UpdateItemAmount(items[y].ItemId);
+                            ItemIDToUpdate.RemoveAt(i);
+                        } else
+                        {
+                            GameObject newItemCard = new GameObject();
+                            GameObject newDropButton = new GameObject();
+                            SpriteRenderer newItemRendere = new SpriteRenderer();
+                            SpriteRenderer newDropButtonRendere = new SpriteRenderer();
+                            ItemCard itemCardObj;
 
+                            Item item;
+                            newItemCard.Start();
+
+
+                            newItemCard.Transform.Position = new Vector2(625, 225 + (ItemCards.Count * 215));
+                            newDropButton.Transform.Position = newItemCard.Transform.Position + new Vector2(470, 110);
+                      
+                            newItemRendere.SetSprite("INVENTORY/InventoryItemCard");
+                            newDropButtonRendere.SetSprite("INVENTORY/DropButton");
+                            newItemCard.AddComponent(newItemRendere);
+                            newDropButton.AddComponent(newDropButtonRendere);
+
+
+
+                            item = Database.GetItemFromDatabase(ItemIDToUpdate[i]);
+                            itemCardObj = new ItemCard(item, newDropButton,ItemCardType.Shop);
+                            newItemCard.AddComponent(itemCardObj);
+
+                            WindowObjects.Add(newItemCard);
+                            WindowObjects.Add(newDropButton);
+
+                            Database.AddItemToInventory(ItemIDToUpdate[i]);
+                            ItemIDToUpdate.RemoveAt(i);
+                        }
+                    }
+
+                }
 
                 UpdateIncomming = false;
             }
