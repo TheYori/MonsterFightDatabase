@@ -18,7 +18,7 @@ namespace MonsterFightDatabase
         private SpriteBatch spriteBatch;
         private static GameManager instance;
 
-        //private Song pumpedUpMusic; 
+        //private Song pumpedUpMusic;
         public static GameManager Instance
         {
             get

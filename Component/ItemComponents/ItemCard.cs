@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MonsterFightDatabase.Class
 {
-    class ItemCard : Component
+    public class ItemCard : Component
     {
         public Item item;
         private SpriteFont itemFont;
@@ -20,6 +20,7 @@ namespace MonsterFightDatabase.Class
             this.item = item;
             BuyButton = button;
             cardType = type;
+            itemFont = GameManager.Instance.Content.Load<SpriteFont>("Font/BaseFont");
         }
 
         public override void Awake()
@@ -40,7 +41,7 @@ namespace MonsterFightDatabase.Class
 
         public override void Start()
         {
-            itemFont = GameManager.Instance.Content.Load<SpriteFont>("Font/BaseFont");
+
             spriteRenderer.Origin = new Vector2(0, 0);
 
                          
@@ -75,6 +76,7 @@ namespace MonsterFightDatabase.Class
         {
             GameManager.Instance.inventoryManager.UpdateIncomming = true;
             Database.UpdateInventory(item.ItemId);
+            GameManager.Instance.inventoryManager.ItemIDToUpdate.Add(item.ItemId);
             GameManager.Instance.shopManager.removeFromShop(GameObject, BuyButton);
 
         }
