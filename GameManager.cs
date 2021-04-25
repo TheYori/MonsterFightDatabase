@@ -70,7 +70,7 @@ namespace MonsterFightDatabase
 
             GameObject go = new GameObject();
 
-           monster = new Monster();
+            monster = new Monster();
             renderer = new SpriteRenderer();
             renderer.SetSprite("TestPicture");
 
