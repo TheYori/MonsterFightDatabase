@@ -25,7 +25,17 @@ namespace MonsterFightDatabase.Class
         public override void Awake()
         {
             spriteRenderer = (SpriteRenderer)GameObject.GetComponent("SpriteRenderer");
-            BuyButton.AddComponent(new Button(new Action(delegate () { BuyObject(); })));
+
+            if(cardType == ItemCardType.Shop)
+            {
+                BuyButton.AddComponent(new Button(new Action(delegate () { BuyObject(); })));
+            }
+
+            if (cardType == ItemCardType.Inventory)
+            {
+                BuyButton.AddComponent(new Button(new Action(delegate () { DropObject(); })));
+            }
+
         }
 
         public override void Start()
@@ -63,11 +73,13 @@ namespace MonsterFightDatabase.Class
 
         public void BuyObject()
         {
-
+            GameManager.Instance.inventoryManager.UpdateIncomming = true;
             Database.UpdateInventory(item.ItemId);
             GameManager.Instance.shopManager.removeFromShop(GameObject, BuyButton);
 
         }
+
+        public void DropObject() { }
 
 
     }

@@ -14,6 +14,7 @@ namespace MonsterFightDatabase.Managers
         private inventoryState state = inventoryState.ItemState;
         private List<Item> items;
         private List<GameObject> ItemCards;
+        public bool UpdateIncomming { get; set; }
 
         public InventoryManager() : base()
         {
@@ -102,7 +103,12 @@ namespace MonsterFightDatabase.Managers
 
 
         public void InitInventory() {
+            if(UpdateIncomming == true)
+            {
 
+
+                UpdateIncomming = false;
+            }
         }
     }
 }

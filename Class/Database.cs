@@ -9,7 +9,30 @@ namespace MonsterFightDatabase.Class
     {
 
 
-        public static void UpdateInventory(int itemID) { }
+        public static void UpdateInventory(int newItemID) {
+
+
+            var connection = new SQLiteConnection("Data Source=staticData.db;Version=3;New=True");
+            connection.Open();
+
+            var cmd = new SQLiteCommand("SELECT * from iteminventory", connection);
+            var dataSet = cmd.ExecuteReader();
+
+            while (dataSet.Read())
+            {
+                int itemId = dataSet.GetInt32(0);
+                int amount = dataSet.GetInt32(1);
+
+                if(newItemID == itemId)
+                {
+                    amount++;
+                    cmd = new SQLiteCommand("UPDATE iteminventory SET amount = " + amount +" WHERE itemId = " + itemId, connection);
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+
+        }
 
         public static List<Item> GetInventoryItems()
         {
@@ -47,6 +70,8 @@ namespace MonsterFightDatabase.Class
 
             }
 
+            connection.Close();
+
             return inventoryItem;
 
         }
@@ -74,6 +99,8 @@ namespace MonsterFightDatabase.Class
 
                 result.Add(new Item(Name, price, legal, effectNumber, id));
             }
+            connection.Close();
+
 
             return result;
 

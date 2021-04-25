@@ -39,7 +39,7 @@ namespace MonsterFightDatabase
         public Manager currentWindow;
 
         private FightManager fightManager;
-        private InventoryManager inventoryManager;
+        public InventoryManager inventoryManager;
         private LaboratoryManager laboratoryManager;
         private LeagueManager leagueManager;
         public ShopManager shopManager;
