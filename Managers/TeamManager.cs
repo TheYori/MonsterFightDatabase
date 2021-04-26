@@ -11,19 +11,15 @@ namespace MonsterFightDatabase.Managers
     {
 
         // TODO:
+
         // 1.
-        // Make "Team Management" and "Sponsor" button.
+        // Show Sponsor info on Infoscreen - just start with name.
 
-        //2.
-        // When pressing the "Team Management" button, Heal, psyche and harvest...
-        // buttons should appear.
-        // Then Do the same with the "Sponsor" button.
-
-        // 3.
+        // 2.
         // Next step: Make the newly appeared sprites buttons
 
-        //4.
-        //Give them a random function, to make sure they work.
+        // 3.
+        // Give them a random function, to make sure they work.
         // pressing the "Accept" button under "Sponsor", should make it green.
         // BONUS: The "Accept" button turn back normal after 1 - 2 seconds.
 
@@ -146,6 +142,7 @@ namespace MonsterFightDatabase.Managers
                 {
                     obj.Draw(sprite);
                 }
+
             }
         }
 

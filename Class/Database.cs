@@ -161,7 +161,29 @@ namespace MonsterFightDatabase.Class
 
 
             return result;
+        }
 
+        public static List<Sponsor> GetSponsors()
+        {
+            List<Sponsor> sponsorInfo = new List<Sponsor>();
+
+            var connection = new SQLiteConnection("Data Source=staticData.db;Version=3;New=True");
+            connection.Open();
+
+            var cmd = new SQLiteCommand("SELECT * FROM sponsor", connection);
+            var dataSet = cmd.ExecuteReader();
+
+            while (dataSet.Read())
+            {
+                string name = dataSet.GetString(0);
+                int money = dataSet.GetInt32(1);
+                int demandnr = dataSet.GetInt32(2);
+
+                sponsorInfo.Add(new Sponsor(name, money, demandnr));
+            }
+            connection.Close();
+
+            return sponsorInfo;
         }
     }
 }
