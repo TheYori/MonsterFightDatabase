@@ -45,7 +45,7 @@ namespace MonsterFightDatabase.Class
                     {
                         while (dataSet.Read())
                         {
-                            final.Add(new Monster(dataSet.GetInt32(0));
+                            final.Add(new Monster(dataSet.GetInt32(0)));
                         }
                     }
                 }

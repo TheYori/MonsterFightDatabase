@@ -52,5 +52,47 @@ namespace MonsterFightDatabase.Managers
             saveButton.AddComponent(saveButtonRender);
             WindowObjects.Add(saveButton);
         }
+
+        public List<GameObject> SetupCards(List<Item> items)
+        {
+
+            List<SpriteRenderer> render = new List<SpriteRenderer>();
+            List<GameObject> obj = new List<GameObject>();
+
+            List<SpriteRenderer> buttonRender = new List<SpriteRenderer>();
+            List<GameObject> buttonObj = new List<GameObject>();
+
+            List<GameObject> result = new List<GameObject>();
+
+
+
+            for (var i = 0; i < items.Count; i++)
+            {
+                if (i < 3)
+                {
+                    render.Add(new SpriteRenderer());
+                    buttonRender.Add(new SpriteRenderer());
+                    obj.Add(new GameObject());
+                    buttonObj.Add(new GameObject());
+
+                    obj[i].Transform.Position = new Vector2(625, 225 + (i * 215));
+                    buttonObj[i].Transform.Position = obj[i].Transform.Position + new Vector2(520, 110);
+                    render[i].SetSprite("SHOP/ShopItemCard");
+                    buttonRender[i].SetSprite("SHOP/BuyButton");
+                    obj[i].AddComponent(render[i]);
+                    buttonObj[i].AddComponent(buttonRender[i]);
+                    obj[i].AddComponent(new ItemCard(items[i], buttonObj[i], ItemCardType.Shop));
+
+                    WindowObjects.Add(obj[i]);
+                    WindowObjects.Add(buttonObj[i]);
+
+                    result.Add(obj[i]);
+                }
+
+
+            }
+
+            return result;
+        }
     }
 }
