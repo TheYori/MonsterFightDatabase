@@ -7,6 +7,18 @@ namespace MonsterFightDatabase.Class
 {
     static class Database
     {
+
+        public static void RemoveItemFromInventory(int removeItemID)
+        {
+            var connection = new SQLiteConnection("Data Source=staticData.db;Version=3;New=True");
+            connection.Open();
+
+            var cmd = new SQLiteCommand($"DELETE FROM iteminventory WHERE itemId = {removeItemID}", connection);
+            cmd.ExecuteNonQuery();
+
+            connection.Close();
+        }
+
         public static void AddItemToInventory(int newItemID)
         {
             var connection = new SQLiteConnection("Data Source=staticData.db;Version=3;New=True");
@@ -96,6 +108,8 @@ namespace MonsterFightDatabase.Class
         {
 
             List<Item> inventoryItem = new List<Item>();
+            List<int> itemIDs = new List<int>();
+            List<int> amounts = new List<int>();
 
             var connection = new SQLiteConnection("Data Source=staticData.db;Version=3;New=True");
             connection.Open();
@@ -111,20 +125,27 @@ namespace MonsterFightDatabase.Class
                 int itemId = dataSet.GetInt32(0);
                 int amount = dataSet.GetInt32(1);
 
-                while (itemSet.Read())
-                {
-                    int id = itemSet.GetInt32(0);
-                    string Name = itemSet.GetString(1);
-                    int price = itemSet.GetInt32(2);
-                    int legal = itemSet.GetInt32(3);
-                    int effectNumber = itemSet.GetInt32(4);
+                itemIDs.Add(itemId);
+                amounts.Add(amount);
+            }
 
-                    if(itemId == id) {
-                        inventoryItem.Add(new Item(Name, amount, legal, effectNumber, id));
+            while (itemSet.Read())
+            {
+                int id = itemSet.GetInt32(0);
+                string Name = itemSet.GetString(1);
+                int price = itemSet.GetInt32(2);
+                int legal = itemSet.GetInt32(3);
+                int effectNumber = itemSet.GetInt32(4);
+
+                for(var d = 0; d < itemIDs.Count; d++)
+                {
+                    if (itemIDs[d] == id)
+                    {
+                        inventoryItem.Add(new Item(Name, amounts[d], legal, effectNumber, id));
                         //Jeg har skifte price variablen ud med Amount variablen, så antal ad item ligger det samme sted som prisen.
                     }
-
                 }
+         
 
             }
 
