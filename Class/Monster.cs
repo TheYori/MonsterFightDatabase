@@ -9,7 +9,7 @@ namespace MonsterFightDatabase.Class
     {
         private int id;
         private static string connectionDynamicString = "Data Source=DynamicData.db;Version=3;";
-        private static string connectionStaticString = "Data Source=staticData.db;Version=3;";;
+        private static string connectionStaticString = "Data Source=staticData.db;Version=3;";
         public int Id { get { return id; } }
         public int Mood
         {
