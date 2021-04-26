@@ -111,16 +111,33 @@ namespace MonsterFightDatabase.Managers
         public void InitInventory() {
             if(UpdateIncomming == true)
             {
-                for(var i=0; i < ItemIDToUpdate.Count; i++)
-                {
-                    for(var y =0; y < items.Count; y++)
+
+                if(ItemIDToUpdate.Count > 0) {
+                    for (var i = 0; i < ItemIDToUpdate.Count; i++)
                     {
-                        if (ItemIDToUpdate[i] == items[y].ItemId)
+                        for (var y = 0; y < items.Count; y++)
                         {
-                            items[y].Price = Database.UpdateItemAmount(items[y].ItemId);
-                            ItemIDToUpdate.RemoveAt(i);
-                        } else
-                        {
+                            if (ItemIDToUpdate[i] == items[y].ItemId)
+                            {
+                                items[y].Price = Database.UpdateItemAmount(items[y].ItemId);
+                                ItemIDToUpdate.RemoveAt(i);
+
+                                if (ItemIDToUpdate.Count == 0)
+                                {
+                                    UpdateIncomming = false;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                if (ItemIDToUpdate.Count > 0)
+                {
+                    for (var i = 0; i < ItemIDToUpdate.Count; i++)
+                    {
+                       
                             GameObject newItemCard = new GameObject();
                             GameObject newDropButton = new GameObject();
                             SpriteRenderer newItemRendere = new SpriteRenderer();
@@ -133,7 +150,7 @@ namespace MonsterFightDatabase.Managers
 
                             newItemCard.Transform.Position = new Vector2(625, 225 + (ItemCards.Count * 215));
                             newDropButton.Transform.Position = newItemCard.Transform.Position + new Vector2(470, 110);
-                      
+
                             newItemRendere.SetSprite("INVENTORY/InventoryItemCard");
                             newDropButtonRendere.SetSprite("INVENTORY/DropButton");
                             newItemCard.AddComponent(newItemRendere);
@@ -142,7 +159,7 @@ namespace MonsterFightDatabase.Managers
 
 
                             item = Database.GetItemFromDatabase(ItemIDToUpdate[i]);
-                            itemCardObj = new ItemCard(item, newDropButton,ItemCardType.Shop);
+                            itemCardObj = new ItemCard(item, newDropButton, ItemCardType.Shop);
                             newItemCard.AddComponent(itemCardObj);
 
                             WindowObjects.Add(newItemCard);
@@ -150,13 +167,36 @@ namespace MonsterFightDatabase.Managers
 
                             Database.AddItemToInventory(ItemIDToUpdate[i]);
                             ItemIDToUpdate.RemoveAt(i);
-                        }
+                        
                     }
-
                 }
+
 
                 UpdateIncomming = false;
             }
+
+
+            
+        }
+
+        public void removeFromShop(GameObject item, GameObject button)
+        {
+            for (var i = 0; i < WindowObjects.Count; i++)
+            {
+                if (WindowObjects[i] == item)
+                {
+                    WindowObjects.RemoveAt(i);
+                }
+            }
+
+            for (var i = 0; i < WindowObjects.Count; i++)
+            {
+                if (WindowObjects[i] == button)
+                {
+                    WindowObjects.RemoveAt(i);
+                }
+            }
+
         }
     }
 }
