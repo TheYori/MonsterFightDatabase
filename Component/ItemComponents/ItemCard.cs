@@ -75,13 +75,18 @@ namespace MonsterFightDatabase.Class
         public void BuyObject()
         {
             GameManager.Instance.inventoryManager.UpdateIncomming = true;
-            Database.UpdateInventory(item.ItemId);
             GameManager.Instance.inventoryManager.ItemIDToUpdate.Add(item.ItemId);
             GameManager.Instance.shopManager.removeFromShop(GameObject, BuyButton);
+            Database.UpdateInventory(item.ItemId);
 
         }
 
-        public void DropObject() { }
+        public void DropObject() {
+
+            GameManager.Instance.inventoryManager.removeFromShop(GameObject, BuyButton);
+            Database.RemoveItemFromInventory(item.ItemId);
+
+        }
 
 
     }
