@@ -73,7 +73,7 @@ namespace MonsterFightDatabase.Managers
                 render = new SpriteRenderer();
                 obj = new GameObject();
 
-                obj.Transform.Position = new Vector2(625, 225 + (result.Count * 215));
+                obj.Transform.Position = new Vector2(225, 225 + (result.Count * 215));
                 render.SetSprite("SHOP/ShopItemCard");
                 obj.AddComponent(render);
                 obj.AddComponent(new MonsterCard(monster));
@@ -82,8 +82,6 @@ namespace MonsterFightDatabase.Managers
 
                 result.Add(obj);
             }
-                    
-
             return result;
         }
     }
