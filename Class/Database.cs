@@ -196,9 +196,9 @@ namespace MonsterFightDatabase.Class
 
             while (dataSet.Read())
             {
-                string name = dataSet.GetString(1);
-                int money = dataSet.GetInt32(2);
-                int demandnr = dataSet.GetInt32(3);
+                string name = dataSet.GetString(0);
+                int money = dataSet.GetInt32(1);
+                int demandnr = dataSet.GetInt32(2);
 
                 sponsorInfo.Add(new Sponsor(name, money, demandnr));
             }

@@ -17,6 +17,7 @@ namespace MonsterFightDatabase.Managers
 
         private List<GameObject> sponsorMenu = new List<GameObject>();
 
+        private List<Sponsor> sponsorList = new List<Sponsor>();
         
         public TeamManager() : base()
         {
@@ -92,6 +93,25 @@ namespace MonsterFightDatabase.Managers
             sponsorMenu.Add(acceptButton);
 
             #endregion
+
+            sponsorList = Database.GetSponsors();
+
+            List<GameObject> sponserObj = new List<GameObject>();
+
+            List<SponsorCard> cardObj = new List<SponsorCard>();
+
+            for (var i = 0; i < sponsorList.Count; i++)
+            {
+                sponserObj.Add(new GameObject());
+                sponserObj[i].Transform.Position = new Vector2(810, 200 +(i*100));
+
+                cardObj.Add(new SponsorCard(sponsorList[i]));
+                sponserObj[i].AddComponent(cardObj[i]);
+
+                sponsorMenu.Add(sponserObj[i]);
+
+            } 
+
         }
 
         public override void Update(GameTime gametime)
@@ -128,7 +148,7 @@ namespace MonsterFightDatabase.Managers
             {
                 foreach (GameObject obj in sponsorMenu)
                 {
-                    //obj.AddComponent(new SponsorCard());
+                   
                     obj.Draw(sprite);
                 }
                 
