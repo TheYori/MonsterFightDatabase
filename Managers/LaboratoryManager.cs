@@ -8,6 +8,7 @@ namespace MonsterFightDatabase.Managers
 {
     public class LaboratoryManager : Manager
     {
+        private Monster currentMonster;
         public LaboratoryManager() : base()
         {
             GameObject backdrop = new GameObject();
@@ -52,46 +53,35 @@ namespace MonsterFightDatabase.Managers
             saveButton.AddComponent(saveButtonRender);
             WindowObjects.Add(saveButton);
         }
-
-        public List<GameObject> SetupCards(List<Item> items)
+        public void setCurrentMonster(Monster monster)
+        {
+            currentMonster = monster; 
+        }
+        public List<GameObject> SetupCards(List<Monster> monsters)
         {
 
-            List<SpriteRenderer> render = new List<SpriteRenderer>();
-            List<GameObject> obj = new List<GameObject>();
-
-            List<SpriteRenderer> buttonRender = new List<SpriteRenderer>();
-            List<GameObject> buttonObj = new List<GameObject>();
+            SpriteRenderer render = new SpriteRenderer();
+            GameObject obj = new GameObject();
 
             List<GameObject> result = new List<GameObject>();
 
 
 
-            for (var i = 0; i < items.Count; i++)
+            foreach(Monster monster in monsters)
             {
-                if (i < 3)
-                {
-                    render.Add(new SpriteRenderer());
-                    buttonRender.Add(new SpriteRenderer());
-                    obj.Add(new GameObject());
-                    buttonObj.Add(new GameObject());
 
-                    obj[i].Transform.Position = new Vector2(625, 225 + (i * 215));
-                    buttonObj[i].Transform.Position = obj[i].Transform.Position + new Vector2(520, 110);
-                    render[i].SetSprite("SHOP/ShopItemCard");
-                    buttonRender[i].SetSprite("SHOP/BuyButton");
-                    obj[i].AddComponent(render[i]);
-                    buttonObj[i].AddComponent(buttonRender[i]);
-                    obj[i].AddComponent(new ItemCard(items[i], buttonObj[i], ItemCardType.Shop));
+                render = new SpriteRenderer();
+                obj = new GameObject();
 
-                    WindowObjects.Add(obj[i]);
-                    WindowObjects.Add(buttonObj[i]);
+                obj.Transform.Position = new Vector2(225, 225 + (result.Count * 215));
+                render.SetSprite("SHOP/ShopItemCard");
+                obj.AddComponent(render);
+                obj.AddComponent(new MonsterCard(monster));
+                Action buttonAction = delegate() { setCurrentMonster(monster); };
+                obj.AddComponent(new Button(buttonAction));
 
-                    result.Add(obj[i]);
-                }
-
-
+                result.Add(obj);
             }
-
             return result;
         }
     }
