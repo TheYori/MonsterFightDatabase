@@ -103,7 +103,7 @@ namespace MonsterFightDatabase.Managers
             for (var i = 0; i < sponsorList.Count; i++)
             {
                 sponserObj.Add(new GameObject());
-                sponserObj[i].Transform.Position = new Vector2(810, 200 +(i*100));
+                sponserObj[i].Transform.Position = new Vector2(810, 200 +(i*200));
 
                 cardObj.Add(new SponsorCard(sponsorList[i]));
                 sponserObj[i].AddComponent(cardObj[i]);

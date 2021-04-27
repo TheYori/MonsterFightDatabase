@@ -21,7 +21,10 @@ namespace MonsterFightDatabase.Class
 
         public override void Draw(SpriteBatch sprite)
         {
-            sprite.DrawString(sponsorFont, "Name: " + sponsor.Name, GameObject.Transform.Position + new Vector2(30, 30), Color.White);
+            sprite.DrawString(sponsorFont, "Sponsor: " + sponsor.Name, GameObject.Transform.Position + new Vector2(30, 30), Color.White);
+            sprite.DrawString(sponsorFont, "Earnings: " + sponsor.Money, GameObject.Transform.Position + new Vector2(30, 80), Color.White);
+            sprite.DrawString(sponsorFont, "Demand: " + sponsor.DemandNumber, GameObject.Transform.Position + new Vector2(30, 130), Color.White);
+
             base.Draw(sprite);
         }
 
