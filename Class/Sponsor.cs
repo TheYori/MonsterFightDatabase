@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MonsterFightDatabase.Class
 {
-    class Sponsor
+    public class Sponsor
     {
         public string Name { get; set; }
         public int Money { get; set; }

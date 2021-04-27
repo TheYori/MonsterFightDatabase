@@ -9,28 +9,15 @@ namespace MonsterFightDatabase.Managers
 {
     public class TeamManager : Manager
     {
-
-        // TODO:
-
-        // 1.
-        // Show Sponsor info on Infoscreen - just start with name.
-
-        // 2.
-        // Next step: Make the newly appeared sprites buttons
-
-        // 3.
-        // Give them a random function, to make sure they work.
-        // pressing the "Accept" button under "Sponsor", should make it green.
-        // BONUS: The "Accept" button turn back normal after 1 - 2 seconds.
-
         private enum ActiveTeamMenu { Team, Sponsor, empty }
 
-        private ActiveTeamMenu activeTeamMenu = ActiveTeamMenu.empty;
+        private ActiveTeamMenu activeTeamMenu = ActiveTeamMenu.Team;
 
         private List<GameObject> teamMenu = new List<GameObject>();
 
         private List<GameObject> sponsorMenu = new List<GameObject>();
 
+        
         public TeamManager() : base()
         {
             //Backdrop for the Team menu
@@ -129,6 +116,7 @@ namespace MonsterFightDatabase.Managers
         public override void Draw(SpriteBatch sprite)
         {
             base.Draw(sprite);
+
             if (activeTeamMenu == ActiveTeamMenu.Team)
             {
                 foreach (GameObject obj in teamMenu)
@@ -140,10 +128,14 @@ namespace MonsterFightDatabase.Managers
             {
                 foreach (GameObject obj in sponsorMenu)
                 {
+                    //obj.AddComponent(new SponsorCard());
                     obj.Draw(sprite);
                 }
-
+                
+                
             }
+
+            
         }
 
         public void CallTeamMenu()
